@@ -50,7 +50,7 @@ func notify(theme: Theme) {
 }
 
 func respond(theme: Theme) {
-    do {
+
 
         // Kitty ----------------------------------------------------------------
         DispatchQueue.global().async {
@@ -65,11 +65,7 @@ func respond(theme: Theme) {
             }
         }
 
-    } catch {
-        let error = error as! ShellOutError
-        print(error.message) // Prints STDERR
-        print(error.output) // Prints STDOUT
-    }
+    
 }
 
 
