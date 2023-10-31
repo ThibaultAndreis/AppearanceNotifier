@@ -59,9 +59,15 @@ func respond(theme: Theme) {
             let arguments = buildKittyArguments(theme: theme)
 
             do {
-                try shellOut(to: "kitty", arguments: arguments)
-            } catch {
-                print("\(Date()) kitty: command failed")
+              try shellOut(to: "kitty", arguments: arguments)
+            
+            } catch  {
+                let error = error as! ShellOutError
+                   print(error.message) // Prints STDERR
+                   print(error.output) // Prints STDOUT
+                fputs("\(error.message)\n", stderr)
+                fputs("\(error.output)\n", stderr)
+                
             }
         }
 
@@ -86,9 +92,9 @@ func getThemeName(theme: Theme) -> String {
     return {
         switch theme {
         case .light:
-            return "Rosé Pine Dawn"
+            return "rpd"
         case .dark:
-            return "Rosé Pine Moon"
+            return "rpm"
         }
     }()
 }
