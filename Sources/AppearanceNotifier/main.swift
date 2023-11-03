@@ -59,8 +59,8 @@ func respond(theme: Theme) {
             let arguments = buildKittyArguments(theme: theme)
 
             do {
-              try shellOut(to: "kitty", arguments: arguments)
-            
+            let res =   try shellOut(to: "kitty", arguments: arguments)
+            print(res);
             } catch  {
                 let error = error as! ShellOutError
                    print(error.message) // Prints STDERR
