@@ -52,14 +52,14 @@ func notify(theme: Theme) {
 func respond(theme: Theme) {
 
 
-        // Kitty ----------------------------------------------------------------
+        // Ghostty ----------------------------------------------------------------
         DispatchQueue.global().async {
-            print("\(Date()) kitty: sending command")
+            print("\(Date()) Ghostty: sending command")
 
-            let arguments = buildKittyArguments(theme: theme)
+            let arguments = buildGhosttyArguments(theme: theme)
 
             do {
-            let res =   try shellOut(to: "kitty", arguments: arguments)
+            let res =   try shellOut(to: "/usr/local/bin/theme-switcher.sh", arguments: arguments)
             print(res);
             } catch  {
                 let error = error as! ShellOutError
@@ -75,13 +75,8 @@ func respond(theme: Theme) {
 }
 
 
-func buildKittyArguments(theme: Theme) -> [String] {
+func buildGhosttyArguments(theme: Theme) -> [String] {
     return [
-        "+kitten",
-        "themes",
-        "--reload-in=all",
-        "--config-file-name",
-        "themes.conf",
         "\(getThemeName(theme: theme))",
     ]
 }
@@ -92,9 +87,9 @@ func getThemeName(theme: Theme) -> String {
     return {
         switch theme {
         case .light:
-            return "rpd"
+            return "light"
         case .dark:
-            return "rpm"
+            return "dark"
         }
     }()
 }
